@@ -1,0 +1,2 @@
+# pgpoolcentos
+pgpool on centos
