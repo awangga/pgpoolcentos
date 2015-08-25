@@ -8,7 +8,7 @@ pgpool on centos
 # cd /etc/pgpool-II
 # vim pcp.conf
 pguser:md5a13f595e93dc71bef638a3a4a2d5371f
-# vim 
+# vim pgpool.conf
 # - Backend Connection Settings -
 
 backend_hostname0 = 'localhost'
