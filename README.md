@@ -52,6 +52,21 @@ host    all         all         127.0.0.1/32          md5
 host    all         all         ::1/128               md5
 # mv pool_passwd pool_passwd.old
 # cp pcp.conf pool_passwd
+# psql -U pguser -p 9999
+```
+
+### psql command
+```sh
+pguser=# create DATABASE simpon;
+pguser=# \c simpon;
+pguser=# CREATE TABLE DEPARTMENT(
+   ID INT PRIMARY KEY      NOT NULL,
+   DEPT           CHAR(50) NOT NULL,
+   EMP_ID         INT      NOT NULL
+);
+pguser=# INSERT INTO DEPARTMENT VALUES (1,'koplak',3);
+pguser=# UPDATE DEPARTMENT SET DEPT = 'cuukkk' WHERE ID = 1;
+pguser=# DELETE FROM DEPARTMENT WHERE ID = 1;
 ```
 
 ### Reference
