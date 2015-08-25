@@ -67,8 +67,19 @@ pguser=# CREATE TABLE DEPARTMENT(
 pguser=# INSERT INTO DEPARTMENT VALUES (1,'koplak',3);
 pguser=# UPDATE DEPARTMENT SET DEPT = 'cuukkk' WHERE ID = 1;
 pguser=# DELETE FROM DEPARTMENT WHERE ID = 1;
+pguser=# CREATE SCHEMA transportasi;
+pguser=# CREATE TABLE transportasi.DEPARTMENT(
+   ID INT PRIMARY KEY      NOT NULL,
+   DEPT           CHAR(50) NOT NULL,
+   EMP_ID         INT      NOT NULL
+);
+pguser=# INSERT INTO transportasi.DEPARTMENT VALUES (1,'koplak',3);
+pguser=# UPDATE transportasi.DEPARTMENT SET DEPT = 'cuukkk' WHERE ID = 1;
+pguser=# DELETE FROM transportasi.DEPARTMENT WHERE ID = 1;
 ```
 
 ### Reference
 
 [pgpool-II Tutorial]http://www.pgpool.net/docs/latest/tutorial-en.html
+
+[psql tutorial]http://www.tutorialspoint.com/postgresql/postgresql_schema.htm
