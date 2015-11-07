@@ -1,8 +1,18 @@
 # pgpoolcentos
 pgpool on centos
 
+### Centos 7
 
-### INstalation
+```sh
+# yum install http://www.pgpool.net/yum/rpms/3.4/redhat/rhel-7-x86_64/pgpool-II-release-3.4-1.noarch.rpm
+# yum install pgpool-II-pg93 pgpool-II-pg93-extensions
+# cd /tmp
+# 
+```
+
+
+### Instalation
+
 ```sh
 # yum install pgpool
 # cd /etc/pgpool-II
