@@ -1,21 +1,25 @@
 # pgpoolcentos
 pgpool on centos
 
-### Centos 7
+### Centos 7 INstallation
 
 ```sh
 # yum install http://www.pgpool.net/yum/rpms/3.4/redhat/rhel-7-x86_64/pgpool-II-release-3.4-1.noarch.rpm
 # yum install pgpool-II-pg93 pgpool-II-pg93-extensions
-# cd /tmp
-# 
+or
+# yum install pgpool 
+
 ```
 
 
 ### Instalation
 
 ```sh
-# yum install pgpool
 # cd /etc/pgpool-II
+generate your md5 user password with md5 generator please dont use pg_md5 its a bug
+select passwd from pg_shadow where usename = 'username';
+# pg_md5 -u postgres -m -p
+md5a13f595e93dc71bef638a3a4a2d5371f
 # vim pcp.conf
 pguser:md5a13f595e93dc71bef638a3a4a2d5371f
 # vim pgpool.conf
@@ -38,6 +42,16 @@ backend_weight1 = 1
 #backend_data_directory1 = '/data1'
 backend_flag1 = 'ALLOW_TO_FAILOVER'
 
+backend_hostname2 = '10.200.0.222'
+backend_port2 = 5432
+backend_weight2 = 1
+backend_flag2 = 'ALLOW_TO_FAILOVER'
+
+backend_hostname3 = '10.200.0.223'
+backend_port3 = 5432
+backend_weight3 = 1
+backend_flag3 = 'ALLOW_TO_FAILOVER'
+
 # - Authentication -
 
 enable_pool_hba = on
@@ -51,6 +65,7 @@ authentication_timeout = 60
                                    # 0 means no timeout.
 
 load_balance_mode = on
+replication_mode = o
 
 # vim pool_hba.conf
 # TYPE  DATABASE    USER        CIDR-ADDRESS          METHOD
@@ -58,10 +73,13 @@ load_balance_mode = on
 # "local" is for Unix domain socket connections only
 local   all         all                               md5
 # IPv4 local connections:
+host    all         all         10.200.0.0/24          md5
 host    all         all         127.0.0.1/32          md5
 host    all         all         ::1/128               md5
 # mv pool_passwd pool_passwd.old
 # cp pcp.conf pool_passwd
+# mkdir /var/run/pgpool
+# systemctl start pgpool
 # psql -U pguser -p 9999
 ```
 
