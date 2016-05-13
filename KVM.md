@@ -23,6 +23,27 @@ Kernel 3.10.0-229.20.1.el7.x86_64 on an x86_64
 lb-db-4 login:
 ```
 
+### KVM Migration
+On source host
+
+```sh
+# virsh shutdown vm
+# virsh dumpxml vm > /tmp/vm.xml
+# scp /tmp/vm.xml kvm02:/tmp/vm.xml
+# scp /var/lib/libvirt/images/vm.qcow2 kvm02:/var/lib/libvirt/images/vm.qcow2
+```
+on destination host
+
+```sh
+# virsh define /tmp/vm.xml 
+# virsh start vm
+```
+remove delete old vm on source host
+
+```sh
+# virsh undefine vm
+# rm /var/lib/libvirt/images/vm.qcow2
+```
 
 ### Reference
 
