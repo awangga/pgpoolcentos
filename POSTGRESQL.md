@@ -32,6 +32,7 @@ $ pg_ctl -D /var/lib/pgsql/data -l logfile start
 # vi /var/lib/pgsql/9.3/data/pg_hba.conf
 IPv4 local connections:
 host    all             all             127.0.0.1/32            md5
+host    replication     postgres        10.200.0.0/24            md5
 # vi /var/lib/pgsql/9.3/data/postgresql.conf 
 listen_addresses='*'
 # systemctl start postgresql-9.3
