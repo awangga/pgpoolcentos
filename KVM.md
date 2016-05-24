@@ -1,6 +1,15 @@
 # KVM / virsh
 Setup and connect
 
+### Start Reboot Shutdown, plug power
+
+```sh
+# virsh start vm
+# virsh reboot vm
+# virst shutdown vm
+# virsh destroy vm
+```
+
 
 ### Connect to shell via console
 
