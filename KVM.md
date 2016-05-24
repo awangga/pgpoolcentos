@@ -27,6 +27,7 @@ lb-db-4 login:
 On source host
 
 ```sh
+# virsh list --all
 # virsh shutdown vm
 # virsh dumpxml vm > /tmp/vm.xml
 # scp /tmp/vm.xml kvm02:/tmp/vm.xml
@@ -44,6 +45,13 @@ remove delete old vm on source host
 # virsh destroy vm
 # virsh undefine vm
 # rm /var/lib/libvirt/images/vm.qcow2
+```
+
+### Attach virtual disk image for data (vdb)
+using --persistent option for updating xml
+
+```sh
+# virsh attach-disk postgres-04 --source /pgdata/postgres-04-data.img --target vdb --persistent
 ```
 
 ### change ip address and hostname
