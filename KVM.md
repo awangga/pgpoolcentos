@@ -41,8 +41,32 @@ on destination host
 remove delete old vm on source host
 
 ```sh
+# virsh destroy vm
 # virsh undefine vm
 # rm /var/lib/libvirt/images/vm.qcow2
+```
+
+### change ip address and hostname
+change ip address
+
+```sh
+$ systemctl status NetworkManager.service
+$ nmcli dev status
+$ vi /etc/sysconfig/network-script/ifcfg-eth0
+ONBOOT="yes"
+BOOTPROTO="static"
+IPADDR=192.168.0.17
+NETMASK=255.255.255.0
+NM_CONTROLLED=no
+```
+change hostname
+
+```sh
+# hostnamectl status
+# hostnamectl set-hostname lb-db3 --static
+# hostnamectl set-hostname lb-db3 --static
+# hostnamectl set-hostname lb-db-3 --transient
+# reboot
 ```
 
 ### Reference
