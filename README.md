@@ -16,8 +16,7 @@ or
 
 ```sh
 # cd /etc/pgpool-II
-generate your md5 user password with md5 generator please dont use pg_md5 its a bug
-select passwd from pg_shadow where usename = 'username';
+generate your md5 user password with pg_md5 and add aoutomatically on pool_passwd
 # pg_md5 -u postgres -m -p
 md5a13f595e93dc71bef638a3a4a2d5371f
 # vim pcp.conf
@@ -76,11 +75,10 @@ local   all         all                               md5
 host    all         all         10.200.0.0/24          md5
 host    all         all         127.0.0.1/32          md5
 host    all         all         ::1/128               md5
-# mv pool_passwd pool_passwd.old
-# cp pcp.conf pool_passwd
+
 # mkdir /var/run/pgpool
 # systemctl start pgpool
-# psql -U pguser -p 9999
+# psql -h 10.200.0.251 -U pguser -p 9999
 ```
 
 ### psql command
