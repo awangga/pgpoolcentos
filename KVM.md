@@ -44,6 +44,14 @@ On source host
 ```
 on destination host
 
+edit xml first change UUID, mac address, name, and disk
+#### Generate UUID, MAC address
+
+```sh
+# echo $(uuidgen)
+# echo $(echo $FQDN|md5sum|sed 's/^\(..\)\(..\)\(..\)\(..\)\(..\).*$/02:\1:\2:\3:\4:\5/')
+```
+
 ```sh
 # virsh define /tmp/vm.xml 
 # virsh start vm
@@ -84,6 +92,35 @@ change hostname
 # hostnamectl set-hostname lb-db3 --static
 # hostnamectl set-hostname lb-db-3 --transient
 # reboot
+```
+
+### VM routing filter
+
+```sh
+# virsh nwfilter-list
+```
+
+### Removing network filter 
+if you can't reach other host in other KVM just remove all network filter
+
+```sh
+# virsh  nwfilter-list
+ UUID                                  Name                 
+------------------------------------------------------------------
+ 611a47b3-9934-445d-8adc-796fca6f46fb  no-mac-broadcast    
+ 913ecfa4-f48d-485b-b578-b0eaef6f4fc4  no-mac-spoofing     
+ d4325af6-9e8c-4449-a073-b3aa20554fe4  qemu-announce-self  
+ 0eb94d1e-25df-43b8-b6bf-ad94143183d6  qemu-announce-self-rarp
+
+# virsh nwfilter-undefine no-mac-broadcast
+Network filter no-mac-broadcast undefined
+
+# virsh nwfilter-undefine no-mac-spoofing
+```
+add arp broadcast or you can set arp static by command
+
+```sh
+# arp -i eth0 -s 10.200.0.203 52:54:00:87:1d:75
 ```
 
 ### Reference

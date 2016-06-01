@@ -51,6 +51,11 @@ NETMASK=255.255.255.0
 #GATEWAY=10.200.0.10
 #DNS1=10.200.0.10
 ```
+edit gateway /etc/sysconfig/network
+
+```sh
+GATEWAY=10.200.0.1
+```
 
 restart network, check bridge, check routing delete other routing bridge if any
 
