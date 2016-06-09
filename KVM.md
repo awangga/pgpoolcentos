@@ -120,7 +120,25 @@ Network filter no-mac-broadcast undefined
 add arp broadcast or you can set arp static by command
 
 ```sh
+# arp -i eth0 -s 10.200.0.202 02:68:b3:29:da:98
 # arp -i eth0 -s 10.200.0.203 52:54:00:87:1d:75
+# arp -i eth0 -s 10.200.0.220 02:6f:ae:23:0a:7b
+# arp -i eth0 -s 10.200.0.221 02:44:3e:c3:61:0c
+# arp -i eth0 -s 10.200.0.222 52:54:00:53:5b:c2
+# arp -i eth0 -s 10.200.0.223 52:54:00:5f:b2:c5
+```
+or you can create shell script for running every minute on crontab 
+* * * * * /root/arp.sh
+
+```sh
+#!/bin/sh
+
+arp -i eth0 -s 10.200.0.222 52:54:00:53:5b:c2
+arp -i eth0 -s 10.200.0.223 52:54:00:5f:b2:c5
+arp -i eth0 -s 10.200.0.220 02:6f:ae:23:0a:7b
+arp -i eth0 -s 10.200.0.221 02:44:3e:c3:61:0c
+arp -i eth0 -s 10.200.0.202 02:68:b3:29:da:98 
+arp -i eth0 -s 10.200.0.203 52:54:00:87:1d:75
 ```
 
 ### Reference
