@@ -110,6 +110,13 @@ sometime if we reboot our machine when pgpool its not responding, it will be blo
 For debugging purpose use this command : 
 _pgpool -n -d_
 
+```sh
+# firewall-cmd --zone=public --add-masquerade --permanent
+# firewall-cmd --zone=public --add-forward-port=port=5432:proto=tcp:toport=9999 --permanent
+# firewall-cmd --reload
+# firewall-cmd --zone=public --list-all
+```
+
 
 
 ### Reference
