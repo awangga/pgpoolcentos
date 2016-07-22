@@ -64,7 +64,10 @@ authentication_timeout = 60
                                    # 0 means no timeout.
 
 load_balance_mode = on
-replication_mode = o
+replication_mode = 1
+
+
+
 
 # vim pool_hba.conf
 # TYPE  DATABASE    USER        CIDR-ADDRESS          METHOD
@@ -117,10 +120,27 @@ _pgpool -n -d_
 # firewall-cmd --zone=public --list-all
 ```
 
+### Setting max connection
+num_init_children :concurrent connections limit to pgpool-II from clients
+
+num_init_children*listen_backlog_multiplier exceeds the number, you need to set the backlong higher
+netstat -s
+# sysctl net.core.somaxconn
+net.core.somaxconn = 128
+ /etc/sysctl.conf
+# sysctl -w net.core.somaxconn=256
+net.core.somaxconn = 256
+
+max_pool
+The maximum number of cached connections in pgpool-II children processes. pgpool-II reuses the cached connection if an incoming connection is connecting to the same database with the same user name. If not, pgpool-II creates a new connection to the backend. If the number of cached connections exceeds max_pool, the oldest connection will be discarded, and uses that slot for the new connection.
+*Default value is 4. Please be aware that the number of connections from pgpool-II processes to the backends may reach num_init_children * max_pool.*
+This parameter can only be set at server start.
 
 
 ### Reference
 
 [pgpool-II Tutorial]http://www.pgpool.net/docs/latest/tutorial-en.html
+
+[PGPool Docs]http://www.pgpool.net/docs/latest/pgpool-en.html
 
 [psql tutorial]http://www.tutorialspoint.com/postgresql/postgresql_schema.htm
